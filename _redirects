@@ -1,0 +1,2 @@
+/* /es/:splat 200 Language=es
+/es/* https://blah.com/:splat 200
