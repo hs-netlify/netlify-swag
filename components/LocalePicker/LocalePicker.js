@@ -20,7 +20,7 @@ export default function LocalePicker() {
       return;
     setCookie("nf_lang", newLocale, {
       path: "/",
-      domain: ".netlify.app",
+      domain: ".moneytronicswag.com",
     });
     Router.reload(window.location.pathname);
   }
