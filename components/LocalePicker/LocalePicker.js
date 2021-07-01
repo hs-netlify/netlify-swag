@@ -18,7 +18,10 @@ export default function LocalePicker() {
   function changeLocale(newLocale) {
     if (newLocale === process.env.NEXT_PUBLIC_LOCALE || !locales[newLocale])
       return;
-    setCookie("nf_lang", newLocale, { path: "/" });
+    setCookie("nf_lang", newLocale, {
+      path: "/",
+      domain: ".netlify.app",
+    });
     Router.reload(window.location.pathname);
   }
 
