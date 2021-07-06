@@ -1,3 +1,4 @@
+import router from "next/router";
 import Router from "next/router";
 import { useCookies } from "react-cookie";
 
@@ -21,7 +22,7 @@ export default function LocalePicker() {
       path: "/",
       domain: ".moneytronicswag.com",
     });
-    window.location.href = window.location.origin;
+    window.location.href = window.location.origin + router.pathname;
   }
 
   return (
