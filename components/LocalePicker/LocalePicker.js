@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Router from "next/router";
 import { useCookies } from "react-cookie";
 
@@ -22,7 +21,7 @@ export default function LocalePicker() {
       path: "/",
       domain: ".moneytronicswag.com",
     });
-    Router.reload(window.location.pathname);
+    Router.reload(window.location.origin);
   }
 
   return (
