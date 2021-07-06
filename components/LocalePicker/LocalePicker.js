@@ -1,5 +1,4 @@
 import router from "next/router";
-import Router from "next/router";
 import { useCookies } from "react-cookie";
 
 const locales = {
@@ -12,9 +11,7 @@ const locales = {
 };
 
 export default function LocalePicker() {
-  const [cookies, setCookie] = useCookies(["nf_lang"]);
-  console.log(cookies);
-
+  const [_, setCookie] = useCookies(["nf_lang"]);
   function changeLocale(newLocale) {
     if (newLocale === process.env.NEXT_PUBLIC_LOCALE || !locales[newLocale])
       return;
