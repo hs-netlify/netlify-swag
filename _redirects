@@ -1,2 +1,1 @@
-/ https://www.moneytronicswag.com/ 302 Language=en
-/ https://es.moneytronicswag.com/ 302 Language=es
+/es/* https://es.moneytronicswag.com/:splat 200
