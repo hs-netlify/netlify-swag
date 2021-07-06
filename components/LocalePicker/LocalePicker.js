@@ -21,7 +21,7 @@ export default function LocalePicker() {
       path: "/",
       domain: ".moneytronicswag.com",
     });
-    Router.reload(window.location.origin);
+    window.location.href = window.location.origin;
   }
 
   return (
