@@ -1,3 +1,2 @@
 /es/* https://es.moneytronicswag.com/:splat 200
-/* /:splat 302! Language=en
 /* /es/:splat 302! Language=es
