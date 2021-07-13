@@ -1,3 +1,5 @@
+/api/* /.netlify/functions/:splat 200
+
 /es/* https://es.moneytronicswag.com/:splat 200
 /en/* https://en.moneytronicswag.com/:splat 200
 
