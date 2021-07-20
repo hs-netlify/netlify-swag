@@ -1,7 +1,7 @@
 /api/* /.netlify/functions/:splat 200
 
-/es/* https://next-netlifyswag-es.netlify.app/es/:splat 200
-/en/* https://next-netlifyswag-en.netlify.app/en/:splat 200
+/es/* https://next-netlifyswag-es.netlify.app/:splat 200
+/en/* https://next-netlifyswag-en.netlify.app/:splat 200
 
 /* /es/:splat 302! Language=es
 /* /en/:splat 302!
