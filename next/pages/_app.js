@@ -1,11 +1,17 @@
 import "tailwindcss/tailwind.css";
-import Nav from "../components/Nav";
+import Head from "next/head";
+import Layout from "../components/Layout";
+const config = require("../next.config");
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Nav />
-      <Component {...pageProps} />
+      <Head>
+        <base href={config.basePath + "/"} />
+      </Head>
+      <Layout navLinks={pageProps.navLinks}>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }

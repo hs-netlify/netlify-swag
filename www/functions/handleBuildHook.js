@@ -8,7 +8,9 @@ const buildHooks = {
   es: "https://api.netlify.com/build_hooks/60ece7d77f8b5c5235bd67f3",
 };
 
-exports.handler = async (event) => {
+exports.handler = async (event, context) => {
+  console.log(event);
+  console.log(context);
   const documentId = JSON.parse(event.body).documents[0];
   if (documentId) {
     const api = await Prismic.client(apiEndpoint);
