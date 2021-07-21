@@ -12,7 +12,7 @@ export default function Navbar({ navLinks }) {
                 <span className="sr-only">Netlify</span>
                 <img
                   className="h-6 w-auto"
-                  src="netlify_logo.svg"
+                  src="/netlify_logo.svg"
                   alt="Netlify Logo"
                 />
               </a>
