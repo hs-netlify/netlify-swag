@@ -15,6 +15,7 @@ module.exports = {
       green: colors.teal,
       indigo: colors.violet,
       netlify: "#02AC9F",
+      white: colors.white,
     },
     extend: {},
   },

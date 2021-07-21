@@ -1,8 +1,35 @@
-// The Shopify Admin API uses IDs in this form:
-// "gid://shopify/Product/6719664718021"
-// But the Storefront API uses this form:
-// "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0LzY3MTk2NjQ3MTgwMjE="
-// Which is the Admin API ID encoded using base64
-export function adminApiIdtoStorefrontId(adminApiId) {
-  return Buffer.from(adminApiId).toString("base64");
+import { GraphQLClient, gql } from "graphql-request";
+
+const client = new GraphQLClient(process.env.NEXT_PUBLIC_SHOPIFY_ENDPOINT, {
+  headers: {
+    "X-Shopify-Storefront-Access-Token":
+      process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
+  },
+});
+
+export async function getInventoryByHandle(handle) {
+  const query = gql`
+    query getProduct($handle: String!) {
+      productByHandle(handle: $handle) {
+        variants(first: 5) {
+          edges {
+            node {
+              id
+              title
+              quantityAvailable
+              priceV2 {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+  const variables = {
+    handle,
+  };
+  const results = await client.request(query, variables);
+  return results.productByHandle.variants.edges.map((n) => n.node);
 }

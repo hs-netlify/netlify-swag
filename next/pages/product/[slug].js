@@ -1,25 +1,25 @@
 import React from "react";
-import { getNavigation, getProduct } from "../../lib/prismic/api";
-import { adminApiIdtoStorefrontId } from "../../lib/shopify/api";
-import { GraphQLClient, gql } from "graphql-request";
+import ProductVariantPicker from "../../components/ProductVariantPicker";
+import {
+  getMostPopularProductsUid,
+  getNavigation,
+  getProduct,
+} from "../../lib/prismic/api";
 
-const endpoint = "https://netlify-swag.myshopify.com/api/2021-07/graphql.json";
-
-const graphQLClient = new GraphQLClient(endpoint, {
-  headers: {
-    "X-Shopify-Storefront-Access-Token": "6f88231ac7ae4121461b916ef11d3a27",
-  },
-});
-
-export default function Product({ product, shopifyProduct }) {
+export default function Product({ product }) {
   return (
-    <div>
-      <h1>Product</h1>
-      <h2>Prismic</h2>
-      <p>{JSON.stringify(product)}</p>
-      <h2>Shopify</h2>
-      <p>{JSON.stringify(shopifyProduct)}</p>
-    </div>
+    <main className="max-w-7xl py-12 mx-auto flex-grow px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[3fr,2fr]">
+      <img
+        className="object-cover shadow-lg rounded-lg"
+        src={product.shopify_product.image.src}
+        alt=""
+      />
+      <div className="space-y-6">
+        <h1 className="font-bold text-3xl">{product.name}</h1>
+        <p>{product.description[0].text}</p>
+        <ProductVariantPicker productHandle={product.shopify_product.handle} />
+      </div>
+    </main>
   );
 }
 
@@ -32,32 +32,23 @@ export async function getStaticProps({ params }) {
       notFound: true,
     };
   }
-  const storefrontId = adminApiIdtoStorefrontId(
-    product.data.shopify_product.admin_graphql_api_id
-  );
-  const query = gql`
-  {
-    node(id: "${storefrontId}") {
-      ... on Product {
-        title
-      }
-    }
-  }
-  `;
-  const data = await graphQLClient.request(query);
-
   return {
     props: {
       navLinks,
       product: product.data,
-      shopifyProduct: data,
     },
   };
 }
 
 export async function getStaticPaths() {
+  // We will only statically generate the most popular product pages
+  // Below we are generating the paths for the products that are tagged as most popular in the CMS
+  const mostPopularProductsUid = await getMostPopularProductsUid();
+  const productStaticPaths = mostPopularProductsUid.map(
+    (uid) => `/product/${uid}`
+  );
   return {
-    paths: [],
+    paths: productStaticPaths,
     fallback: "blocking",
   };
 }

@@ -33,3 +33,19 @@ export async function getProduct(slug) {
   });
   return product;
 }
+
+export async function getMostPopularProductsUid() {
+  const api = await getApi();
+  const mostPopular = await api.query(
+    [
+      Prismic.Predicates.at("document.type", "product"),
+      Prismic.Predicates.at("document.tags", ["most_popular"]),
+    ],
+    {
+      fetch: "product.uid",
+      lang: locale,
+      pageSize: 100,
+    }
+  );
+  return mostPopular.results.map((r) => r.uid);
+}

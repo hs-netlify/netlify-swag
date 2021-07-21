@@ -4,8 +4,8 @@ import FeaturedProduct from "../components/FeaturedProduct";
 
 export default function Home({ featuredProducts }) {
   return (
-    <main className="flex-grow max-w-7xl mx-auto">
-      <h1 className="my-12 text-3xl font-bold">{featuredProducts.title}</h1>
+    <main className="flex-grow max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+      <h1 className="mb-12 text-3xl font-bold">{featuredProducts.title}</h1>
       <ul className="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
         {featuredProducts.products.map((product) => (
           <li key={product.title}>

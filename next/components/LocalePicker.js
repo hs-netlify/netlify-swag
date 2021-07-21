@@ -25,6 +25,7 @@ export default function LocalePicker() {
 
   return (
     <select
+      className="border-0"
       value={process.env.NEXT_PUBLIC_LOCALE}
       onChange={(e) => changeLocale(e.currentTarget.value)}
     >
