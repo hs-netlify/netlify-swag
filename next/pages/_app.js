@@ -5,14 +5,9 @@ const config = require("../next.config");
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Head>
-        <base href={config.basePath + "/"} />
-      </Head>
-      <Layout navLinks={pageProps.navLinks}>
-        <Component {...pageProps} />
-      </Layout>
-    </>
+    <Layout navLinks={pageProps.navLinks}>
+      <Component {...pageProps} />
+    </Layout>
   );
 }
 
