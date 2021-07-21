@@ -8,7 +8,7 @@ export default function ProductVariantPicker({ productHandle }) {
   // We can use this to fetch dynamic data like inventory levels at runtime
   useEffect(() => {
     getInventoryByHandle(productHandle).then(setVariants);
-  });
+  }, []);
   return (
     <div className="space-y-4">
       <h2 className="uppercase text-sm text-gray-400">Size</h2>
