@@ -1,5 +1,3 @@
-/api/* /.netlify/functions/:splat 200
-
 /* https://es.moneytronicswag.com/:splat 302 Language=es
 /* https://next-netlifyswag-en.netlify.app/:splat 200
 
