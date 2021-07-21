@@ -19,7 +19,8 @@ export default function LocalePicker() {
       path: "/",
       domain: ".moneytronicswag.com",
     });
-    window.location.href = "https://www.moneytronicswag.com/" + router.pathname;
+    window.location.href =
+      "https://www.moneytronicswag.com" + window.location.pathname;
   }
 
   return (
