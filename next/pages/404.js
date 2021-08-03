@@ -1,4 +1,4 @@
-import { getNavigation } from "../lib/prismic/api";
+import { getNavigation } from "../lib/prismic";
 import Link from "next/link";
 
 export default function Custom404() {

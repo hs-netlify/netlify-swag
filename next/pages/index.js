@@ -1,4 +1,4 @@
-import { getNavigation, getHome, getProduct } from "../lib/prismic/api";
+import { getNavigation, getHome, getProduct } from "../lib/prismic";
 import Link from "next/link";
 import FeaturedProduct from "../components/FeaturedProduct";
 

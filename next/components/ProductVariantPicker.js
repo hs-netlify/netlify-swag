@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
-import { getInventoryByHandle } from "../lib/shopify/api";
+import { getInventoryByHandle } from "../lib/shopify";
+import { useCart } from "../context/cart-context";
 
 export default function ProductVariantPicker({ productHandle }) {
   const [selectedVariant, setSelectedVariant] = useState("");
   const [variants, setVariants] = useState([]);
+
   // API calls made in useEffect will be run client side
   // We can use this to fetch dynamic data like inventory levels at runtime
   useEffect(() => {
     getInventoryByHandle(productHandle).then(setVariants);
   }, []);
+
+  const { addItemToCart } = useCart();
+
   return (
     <div className="space-y-4">
       <h2 className="uppercase text-sm text-gray-400">Size</h2>
@@ -19,8 +24,8 @@ export default function ProductVariantPicker({ productHandle }) {
               <li
                 key={variant.id}
                 onClick={() => setSelectedVariant(variant)}
-                className={`py-2 px-3 border rounded-md cursor-pointer ${
-                  variant.quantityAvailable > 0 ? "" : "opacity-50 line-through"
+                className={`h-12 w-12 flex items-center justify-center text-center border-2 rounded-md cursor-pointer ${
+                  variant.quantityAvailable > 0 ? "" : "opacity-30 line-through"
                 } ${
                   variant.id === selectedVariant.id
                     ? "border-green-500 text-green-500"
@@ -33,6 +38,7 @@ export default function ProductVariantPicker({ productHandle }) {
           })}
       </ul>
       <button
+        onClick={() => addItemToCart(selectedVariant.id, 1)}
         className={`w-full text-center py-4 px-6 rounded-md text-white font-semibold ${
           !selectedVariant || selectedVariant.quantityAvailable === 0
             ? "bg-gray-300"

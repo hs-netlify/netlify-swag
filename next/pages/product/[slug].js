@@ -4,7 +4,7 @@ import {
   getMostPopularProductsUid,
   getNavigation,
   getProduct,
-} from "../../lib/prismic/api";
+} from "../../lib/prismic";
 
 export default function Product({ product }) {
   return (
@@ -43,6 +43,8 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   // We will only statically generate the most popular product pages
   // Below we are generating the paths for the products that are tagged as most popular in the CMS
+  // The Essential Next plugin will automatically create a builder function to handle
+  // generating any other pages on demand using a Netlify On-demand Builder
   const mostPopularProductsUid = await getMostPopularProductsUid();
   const productStaticPaths = mostPopularProductsUid.map(
     (uid) => `/product/${uid}`

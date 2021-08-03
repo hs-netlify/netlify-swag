@@ -1,11 +1,14 @@
 import "tailwindcss/tailwind.css";
 import Layout from "../components/Layout";
+import { CartProvider } from "../context/cart-context";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout navLinks={pageProps.navLinks}>
-      <Component {...pageProps} />
-    </Layout>
+    <CartProvider>
+      <Layout navLinks={pageProps.navLinks}>
+        <Component {...pageProps} />
+      </Layout>
+    </CartProvider>
   );
 }
 
