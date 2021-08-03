@@ -141,12 +141,18 @@ function useCart() {
     }
   }
 
+  const total = cart?.lines?.edges?.reduce((sum, current) => {
+    return sum + current.node.quantity;
+  }, 0);
+  const totalItems = total ?? 0;
+
   return {
     cart,
     addItemToCart,
     removeItemFromCart,
     increaseItemQuantity,
     decreaseItemQuantity,
+    totalItems,
   };
 }
 
