@@ -60,6 +60,10 @@ function useCart() {
     if (existingCartId && existingCartId !== "null") {
       try {
         const existingCart = await fetchExistingCart(existingCartId);
+        if (!existingCart) {
+          // if the user has completed checkout with the cart we get a null cart and need to create a new one
+          throw "Cart has no data";
+        }
         setCart(existingCart);
         return;
       } catch (error) {
