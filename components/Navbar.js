@@ -1,5 +1,4 @@
 import Link from "next/link";
-import LocalePicker from "./LocalePicker";
 import { useCart } from "../context/cart-context";
 
 export default function Navbar({ navLinks, openCart }) {
@@ -53,7 +52,6 @@ export default function Navbar({ navLinks, openCart }) {
                 </span>
               )}
             </button>
-            <LocalePicker />
           </div>
         </div>
         <div className="py-4 flex flex-wrap justify-center space-x-6 sm:hidden">
