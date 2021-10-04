@@ -1,23 +1,18 @@
 import { getNavigation, getHome, getProduct } from "../lib/prismic";
-import Link from "next/link";
-import FeaturedProduct from "../components/FeaturedProduct";
+import HeroOverlappingImages from "../components/HeroOverlappingImages";
+import Perks from "../components/Perks.js";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 export default function Home({ featuredProducts }) {
   return (
-    <main className="flex-grow max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
-      <h1 className="mb-12 text-5xl font-bold">{featuredProducts.title}</h1>
-      <ul className="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-        {featuredProducts.products.map((product) => (
-          <li key={product.title}>
-            <Link href={`/product/${product.slug}`}>
-              <a>
-                <FeaturedProduct product={product} />
-              </a>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <>
+      <HeroOverlappingImages />
+      <FeaturedProducts
+        title={featuredProducts.title}
+        products={featuredProducts.products}
+      />
+      <Perks />
+    </>
   );
 }
 
@@ -29,7 +24,8 @@ export async function getStaticProps({ params }) {
       const product = await getProduct(p.featured_product.uid);
       return {
         title: product.data.name,
-        slug: p.featured_product.uid,
+        id: p.featured_product.uid,
+        href: `/product/${p.featured_product.uid}`,
         imageUrl: product.data.shopify_product.image.src,
       };
     })
