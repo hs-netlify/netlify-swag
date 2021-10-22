@@ -1,2 +1,9 @@
 [functions]
   node_bundler = "esbuild"
+
+[build]
+  publish = "out/"
+  command = "echo '/*\n Basic-Auth: $NETLIFY_DEV_USER:$NETLIFY_DEV_PASSWORD' > _headers && yarn build"
+
+[context.production]
+  command = "yarn build"
