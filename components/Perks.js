@@ -20,13 +20,6 @@ const perks = [
     description:
       "We understand that when your product arrives you might not particularly like it, or you ordered the wrong thing. Conditions apply here.",
   },
-  {
-    name: "Unlimited free delivery, all year round",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce/icons/icon-delivery-light.svg",
-    description:
-      "Name another place that offers year long free delivery? We’ll be waiting. Order now and you’ll get delivery absolutely free.",
-  },
 ];
 
 export default function Perks() {
