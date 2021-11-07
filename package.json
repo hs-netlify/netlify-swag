@@ -17,7 +17,7 @@
     "classnames": "^2.3.1",
     "graphql": "^15.5.1",
     "graphql-request": "^3.4.0",
-    "next": "latest",
+    "next": "12",
     "react": "^17.0.2",
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.2",
@@ -25,6 +25,7 @@
     "shopify-buy": "^2.11.0"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.0.0-beta.5",
     "autoprefixer": "^10.2.6",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
