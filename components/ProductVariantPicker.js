@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getInventoryByHandle } from "../lib/shopify";
 import { useCart } from "../context/cart-context";
+import { formatPrice } from "../lib/utils";
 
 export default function ProductVariantPicker({ productHandle }) {
   const [selectedVariant, setSelectedVariant] = useState("");
@@ -48,7 +49,7 @@ export default function ProductVariantPicker({ productHandle }) {
         {!selectedVariant
           ? "Select A Size"
           : selectedVariant.quantityAvailable > 0
-          ? `Add to Cart - $${selectedVariant.priceV2.amount}`
+          ? `Add to Cart - ${formatPrice(selectedVariant.priceV2.amount)}`
           : "Out of Stock"}
       </button>
     </div>

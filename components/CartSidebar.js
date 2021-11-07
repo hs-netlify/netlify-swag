@@ -3,6 +3,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon, ShoppingCartIcon } from "@heroicons/react/outline";
 import { useCart } from "../context/cart-context";
+import { formatPrice } from "../lib/utils";
 
 export default function CartSidebar({ open, setOpen }) {
   const { cart, removeItemFromCart } = useCart();
@@ -69,7 +70,9 @@ export default function CartSidebar({ open, setOpen }) {
                               const id = p.node.id;
                               const title = p.node.merchandise.product.title;
                               const variant = p.node.merchandise.title;
-                              const price = p.node.merchandise.priceV2.amount;
+                              const price = formatPrice(
+                                p.node.merchandise.priceV2.amount
+                              );
                               const quantity = p.node.quantity;
                               const imageSrc =
                                 p.node.merchandise.product.images.edges[0].node
@@ -88,7 +91,7 @@ export default function CartSidebar({ open, setOpen }) {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>{title}</h3>
-                                        <p className="ml-4">${price}</p>
+                                        <p className="ml-4">{price}</p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">
                                         {variant}
@@ -141,10 +144,12 @@ export default function CartSidebar({ open, setOpen }) {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${cart.estimatedCost.totalAmount.amount}</p>
+                        <p>
+                          {formatPrice(cart.estimatedCost.totalAmount.amount)}
+                        </p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
-                        Shipping and taxes calculated at checkout.
+                        Shipping calculated at checkout.
                       </p>
                       <div className="mt-6">
                         <a
