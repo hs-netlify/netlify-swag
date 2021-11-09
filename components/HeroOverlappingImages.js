@@ -65,7 +65,7 @@ export default function HeroOverlappingImages() {
         </div>
         <div className="relative py-32">
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
-            Mid-Season Sale
+            Black Friday Sale
           </h1>
           <div className="mt-4 sm:mt-6">
             <a
