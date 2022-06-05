@@ -1,13 +1,15 @@
 import Link from "next/link";
+import Image from "next/image";
 import { formatPrice } from "../lib/utils";
 
 export default function ProductCard({ product }) {
   return (
     <div key={product.id} className="group relative">
-      <div className="w-full h-72 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 xl:h-80">
-        <img
+      <div className="relative w-full h-72 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 xl:h-80">
+        <Image
           src={product.imageUrl}
           alt={product.imageAlt}
+          layout="fill"
           className="w-full h-full object-center object-cover"
         />
       </div>

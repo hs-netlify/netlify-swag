@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const collections = [
   {
@@ -53,9 +54,10 @@ export default function HeroOverlappingImages() {
         >
           <div className="flex-1 relative w-full bg-gray-800">
             <div className="absolute inset-0 overflow-hidden">
-              <img
+              <Image
                 src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg"
                 alt=""
+                layout="fill"
                 className="w-full h-full object-center object-cover"
               />
             </div>
@@ -97,9 +99,10 @@ export default function HeroOverlappingImages() {
                   className="absolute inset-0 rounded-lg overflow-hidden"
                 >
                   <div className="absolute inset-0 overflow-hidden group-hover:opacity-75">
-                    <img
+                    <Image
                       src={collection.imageSrc}
                       alt={collection.imageAlt}
+                      layout="fill"
                       className="w-full h-full object-center object-cover"
                     />
                   </div>
