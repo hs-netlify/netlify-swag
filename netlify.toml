@@ -10,5 +10,5 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[context.branch-deploy.environment]
+[environment]
   NEXT_USE_NETLIFY_EDGE = "true"
