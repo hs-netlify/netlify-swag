@@ -10,5 +10,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[environment]
-  NEXT_USE_NETLIFY_EDGE = "true"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Basic-Auth = "admin:admin"
