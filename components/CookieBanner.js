@@ -11,7 +11,7 @@ export default function CookieBanner() {
   }
 
   return (
-    <div id="cookie-consent" className="fixed inset-x-0 bottom-0">
+    <div id="cookie-banner" className="fixed inset-x-0 bottom-0">
       <div className="bg-green-500">
         <div className="mx-auto max-w-7xl py-3 px-3 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between">
