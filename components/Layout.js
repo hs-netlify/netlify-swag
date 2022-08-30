@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import CookieBanner from "./CookieBanner";
 import { useCart } from "../context/cart-context";
 import CartSidebar from "./CartSidebar";
 import { useState } from "react";
@@ -17,6 +18,7 @@ export default function Layout({ children, navLinks }) {
         <main>{children}</main>
         <Footer />
       </div>
+      <CookieBanner />
       <CartSidebar open={open} setOpen={setOpen} />
     </>
   );
