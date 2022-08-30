@@ -5,7 +5,10 @@ import { CartProvider } from "../context/cart-context";
 function MyApp({ Component, pageProps }) {
   return (
     <CartProvider>
-      <Layout navLinks={pageProps.navLinks}>
+      <Layout
+        navLinks={pageProps.navLinks}
+        cookieConsentGiven={pageProps.cookieConsentGiven}
+      >
         <Component {...pageProps} />
       </Layout>
     </CartProvider>

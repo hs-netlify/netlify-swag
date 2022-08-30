@@ -5,7 +5,7 @@ import { useCart } from "../context/cart-context";
 import CartSidebar from "./CartSidebar";
 import { useState } from "react";
 
-export default function Layout({ children, navLinks }) {
+export default function Layout({ children, navLinks, cookieConsentGiven }) {
   const { cart } = useCart();
   const [open, setOpen] = useState(false);
   function openCart() {
