@@ -48,33 +48,35 @@ function useCart() {
     [dispatch]
   );
 
-  useEffect(async () => {
-    if (cart) return;
-
-    if (!IS_CLIENT) {
-      setCart({});
-    }
-
-    // check if we already have a cart stored for this browser
-    const existingCartId = localStorage.getItem("shopify_cart_id");
-    if (existingCartId && existingCartId !== "null") {
-      try {
-        const existingCart = await fetchExistingCart(existingCartId);
-        if (!existingCart) {
-          // if the user has completed checkout with the cart we get a null cart and need to create a new one
-          throw "Cart has no data";
+  useEffect(() => {
+    async function runEffect() {
+      if (!cart) {
+        if (!IS_CLIENT) {
+          setCart({});
         }
-        setCart(existingCart);
-        return;
-      } catch (error) {
-        localStorage.removeItem("shopify_cart_id");
+
+        // check if we already have a cart stored for this browser
+        const existingCartId = localStorage.getItem("shopify_cart_id");
+        if (existingCartId && existingCartId !== "null") {
+          try {
+            const existingCart = await fetchExistingCart(existingCartId);
+            if (!existingCart) {
+              // if the user has completed checkout with the cart we get a null cart and need to create a new one
+              throw "Cart has no data";
+            }
+            setCart(existingCart);
+          } catch (error) {
+            localStorage.removeItem("shopify_cart_id");
+          }
+        } else {
+          // if we get here, we need to create a new cart
+          const newCart = await createEmptyCart();
+          localStorage.setItem("shopify_cart_id", newCart.id);
+          setCart(newCart);
+        }
       }
     }
-
-    // if we get here, we need to create a new cart
-    const newCart = await createEmptyCart();
-    localStorage.setItem("shopify_cart_id", newCart.id);
-    setCart(newCart);
+    runEffect();
   }, [cart, setCart]);
 
   async function addItemToCart(variantId, quantity) {
