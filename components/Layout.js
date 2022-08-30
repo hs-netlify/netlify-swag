@@ -1,14 +1,10 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CookieBanner from "./CookieBanner";
-import { useCart } from "../context/cart-context";
 import CartSidebar from "./CartSidebar";
 import { useState } from "react";
 
 export default function Layout({ children, navLinks, cookieConsentGiven }) {
-  console.log(cookieConsentGiven);
-  const { cart } = useCart();
-
   const [open, setOpen] = useState(false);
   function openCart() {
     setOpen(true);

@@ -37,7 +37,6 @@ export async function getStaticProps({ params }) {
   }
   return {
     props: {
-      changedFromEdge: false,
       navLinks,
       product: product.data,
     },
