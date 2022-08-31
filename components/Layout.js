@@ -6,15 +6,15 @@ import { useState } from "react";
 
 export default function Layout({ children, navLinks, cookieConsentGiven }) {
   const [cookieConsent, setCookieConsent] = useState(cookieConsentGiven);
-  const [open, setOpen] = useState(false);
-  function openCart() {
-    setOpen(true);
-  }
   function handleAcceptCookies() {
     document.cookie = "cookieConsentGiven=true; path=/";
     setCookieConsent(true);
   }
 
+  const [open, setOpen] = useState(false);
+  function openCart() {
+    setOpen(true);
+  }
   return (
     <>
       <div className="min-h-screen grid grid-cols-1 grid-rows-[auto,1fr,auto]">
