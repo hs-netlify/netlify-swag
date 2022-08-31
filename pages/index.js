@@ -8,7 +8,7 @@ export default function Home({ featuredProducts, keepShopping }) {
   const hydrated = useHydrated();
   return (
     <>
-      {hydrated && keepShopping ? (
+      {!hydrated ? null : keepShopping ? (
         <FeaturedProducts
           title={keepShopping.title}
           products={keepShopping.products}
