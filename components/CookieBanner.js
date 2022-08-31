@@ -1,10 +1,7 @@
-import { useRouter } from "next/router";
-
-export default function CookieBanner() {
+export default function CookieBanner({ setCookieConsentGiven }) {
   function setCookieConsent() {
     document.cookie = "cookieConsentGiven=true; path=/";
-    const router = useRouter();
-    router.reload(window.location.pathname);
+    setCookieConsentGiven(true);
   }
 
   return (

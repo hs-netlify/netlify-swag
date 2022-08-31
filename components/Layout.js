@@ -4,7 +4,12 @@ import CookieBanner from "./CookieBanner";
 import CartSidebar from "./CartSidebar";
 import { useState } from "react";
 
-export default function Layout({ children, navLinks, cookieConsentGiven }) {
+export default function Layout({
+  children,
+  navLinks,
+  cookieConsentGiven,
+  setCookiesConsentGiven,
+}) {
   const [open, setOpen] = useState(false);
   function openCart() {
     setOpen(true);
@@ -16,7 +21,9 @@ export default function Layout({ children, navLinks, cookieConsentGiven }) {
         <main>{children}</main>
         <Footer />
       </div>
-      {cookieConsentGiven ? null : <CookieBanner />}
+      {cookieConsentGiven ? null : (
+        <CookieBanner setCookiesConsentGiven={setCookiesConsentGiven} />
+      )}
       <CartSidebar open={open} setOpen={setOpen} />
     </>
   );
