@@ -10,6 +10,11 @@ export default function Layout({ children, navLinks, cookieConsentGiven }) {
   function openCart() {
     setOpen(true);
   }
+  function handleAcceptCookies() {
+    document.cookie = "cookieConsentGiven=true; path=/";
+    setCookieConsent(true);
+  }
+
   return (
     <>
       <div className="min-h-screen grid grid-cols-1 grid-rows-[auto,1fr,auto]">
@@ -18,7 +23,7 @@ export default function Layout({ children, navLinks, cookieConsentGiven }) {
         <Footer />
       </div>
       {cookieConsent ? null : (
-        <CookieBanner setCookieConsent={setCookieConsent} />
+        <CookieBanner handleAccept={handleAcceptCookies} />
       )}
       <CartSidebar open={open} setOpen={setOpen} />
     </>

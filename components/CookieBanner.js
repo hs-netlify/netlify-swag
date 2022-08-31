@@ -1,9 +1,4 @@
-export default function CookieBanner({ setCookieConsent }) {
-  function handleClick() {
-    document.cookie = "cookieConsentGiven=true; path=/";
-    setCookieConsent(true);
-  }
-
+export default function CookieBanner({ handleAccept }) {
   return (
     <div id="cookie-banner" className="fixed inset-x-0 bottom-0">
       <div className="bg-green-500">
@@ -15,7 +10,7 @@ export default function CookieBanner({ setCookieConsent }) {
             </p>
             <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto">
               <button
-                onClick={handleClick}
+                onClick={handleAccept}
                 className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-green-600 shadow-sm hover:bg-green-50"
               >
                 Accept All
