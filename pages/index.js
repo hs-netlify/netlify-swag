@@ -2,15 +2,24 @@ import { getNavigation, getHome, getProduct } from "../lib/prismic";
 import HeroOverlappingImages from "../components/HeroOverlappingImages";
 import Perks from "../components/Perks.js";
 import FeaturedProducts from "../components/FeaturedProducts";
+import { useHydrated } from "../lib/utils";
 
-export default function Home({ featuredProducts }) {
+export default function Home({ featuredProducts, keepShopping }) {
+  const hydrated = useHydrated();
   return (
     <>
+      {hydrated && keepShopping ? (
+        <FeaturedProducts
+          title={keepShopping.title}
+          products={keepShopping.products}
+        />
+      ) : (
+        <FeaturedProducts
+          title={featuredProducts.title}
+          products={featuredProducts.products}
+        />
+      )}
       <HeroOverlappingImages />
-      <FeaturedProducts
-        title={featuredProducts.title}
-        products={featuredProducts.products}
-      />
       <Perks />
     </>
   );
