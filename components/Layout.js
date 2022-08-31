@@ -18,7 +18,7 @@ export default function Layout({ children, navLinks, cookieConsentGiven }) {
         <Footer />
       </div>
       {cookieConsent ? null : (
-        <CookieBanner setCookiesConsent={setCookiesConsent} />
+        <CookieBanner setCookieConsent={setCookieConsent} />
       )}
       <CartSidebar open={open} setOpen={setOpen} />
     </>
