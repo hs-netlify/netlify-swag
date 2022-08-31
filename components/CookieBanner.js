@@ -1,7 +1,7 @@
-export default function CookieBanner({ setCookieConsentGiven }) {
+export default function CookieBanner({ setCookieConsent }) {
   function setCookieConsent() {
     document.cookie = "cookieConsentGiven=true; path=/";
-    setCookieConsentGiven(true);
+    setCookieConsent(true);
   }
 
   return (
