@@ -5,8 +5,43 @@ import {
   getNavigation,
   getProduct,
 } from "../../lib/prismic";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
-export default function Product({ product }) {
+function setVisitedProductsCookie(product) {
+  const slug = product.shopify_product.handle;
+  const productSummary = {
+    title: product.name,
+    id: slug,
+    href: `/product/${slug}`,
+    imageUrl: product.shopify_product.image.src,
+  };
+  const visitedProductsJson = Cookies.get("visitedProducts");
+  let visitedProducts = {};
+  if (visitedProductsJson) {
+    visitedProducts = JSON.parse(visitedProductsJson);
+  }
+  if (visitedProducts[slug]) {
+    visitedProducts[slug].product = productSummary;
+    visitedProducts[slug].vistCount++;
+    visitedProducts[slug].lastVisited = new Date();
+  } else {
+    visitedProducts[slug] = {
+      product: productSummary,
+      vistCount: 1,
+      lastVisited: new Date(),
+    };
+  }
+  Cookies.set("visitedProducts", JSON.stringify(visitedProducts));
+}
+
+export default function Product({ product, cookieConsentGiven }) {
+  useEffect(() => {
+    if (cookieConsentGiven) {
+      setVisitedProductsCookie(product);
+    }
+  }, [cookieConsentGiven]);
+
   return (
     <main className="max-w-7xl py-12 mx-auto flex-grow px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[3fr,2fr]">
       <div className="relative h-[46rem]">
