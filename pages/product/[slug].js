@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import Cookies from "js-cookie";
 import Image from "next/image";
-
 import ProductVariantPicker from "../../components/ProductVariantPicker";
 import {
   getMostPopularProductsUid,
@@ -38,13 +37,13 @@ function setVisitedProductsCookie(product) {
 }
 
 export default function Product({ product }) {
-  const cookieCtx = useContext(CookiesContext);
+  const { cookieConsentGiven } = useContext(CookiesContext);
 
   useEffect(() => {
-    if (cookieCtx.cookies) {
+    if (cookieConsentGiven) {
       setVisitedProductsCookie(product);
     }
-  }, [cookieCtx.cookies]);
+  }, [cookieConsentGiven]);
 
   return (
     <main className="max-w-7xl py-12 mx-auto flex-grow px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[3fr,2fr]">
