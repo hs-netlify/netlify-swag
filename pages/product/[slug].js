@@ -1,12 +1,13 @@
-import ProductVariantPicker from "../../components/ProductVariantPicker";
+import { useEffect, useContext } from "react";
+import Cookies from "js-cookie";
 import Image from "next/image";
+import ProductVariantPicker from "../../components/ProductVariantPicker";
 import {
   getMostPopularProductsUid,
   getNavigation,
   getProduct,
 } from "../../lib/prismic";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
+import CookiesContext from "../../context/cookies-context";
 
 function setVisitedProductsCookie(product) {
   const slug = product.shopify_product.handle;
@@ -35,7 +36,9 @@ function setVisitedProductsCookie(product) {
   Cookies.set("visitedProducts", JSON.stringify(visitedProducts));
 }
 
-export default function Product({ product, cookieConsentGiven }) {
+export default function Product({ product }) {
+  const { cookieConsentGiven } = useContext(CookiesContext);
+
   useEffect(() => {
     if (cookieConsentGiven) {
       setVisitedProductsCookie(product);
