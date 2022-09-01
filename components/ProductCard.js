@@ -1,30 +1,33 @@
 import Link from "next/link";
 import Image from "next/image";
-import { formatPrice } from "../lib/utils";
 
 export default function ProductCard({ product }) {
   return (
-    <div key={product.id} className="group relative">
-      <div className="relative w-full h-72 bg-gray-200 rounded-md overflow-hidden group-hover:opacity-75 xl:h-80">
-        <Image
-          src={product.imageUrl}
-          alt={product.imageAlt}
-          layout="fill"
-          className="w-full h-full object-center object-cover"
-        />
+    <div className="group relative">
+      <div className="relative w-full h-72 rounded-md overflow-hidden group-hover:opacity-75 xl:h-80">
+        {product?.imageUrl ? (
+          <Image
+            src={product.imageUrl}
+            alt={product.imageAlt}
+            layout="fill"
+            className="w-full h-full object-center object-cover"
+          />
+        ) : (
+          <div className="animate-pulse w-full h-full bg-gray-300" />
+        )}
       </div>
-      <h3 className="mt-4 text-sm text-gray-700">
-        <Link href={product.href}>
-          <a>
-            <span className="absolute inset-0" />
-            {product.title}
-          </a>
-        </Link>
+      <h3 className="min-h-[1.25rem] w-full mt-4 text-sm text-gray-700">
+        {product?.title ? (
+          <Link href={product.href}>
+            <a>
+              <span className="absolute inset-0" />
+              {product.title}
+            </a>
+          </Link>
+        ) : (
+          <div className="animate-pulse rounded-md w-3/4 h-4 bg-gray-400" />
+        )}
       </h3>
-      <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-      <p className="mt-1 text-sm font-medium text-gray-900">
-        {product.price && formatPrice(product.price)}
-      </p>
     </div>
   );
 }

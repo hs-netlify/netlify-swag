@@ -6,19 +6,10 @@ import { useHydrated } from "../lib/utils";
 
 export default function Home({ featuredProducts, keepShopping }) {
   const hydrated = useHydrated();
+  const featured = hydrated && keepShopping ? keepShopping : featuredProducts;
   return (
     <>
-      {!hydrated ? null : keepShopping ? (
-        <FeaturedProducts
-          title={keepShopping.title}
-          products={keepShopping.products}
-        />
-      ) : (
-        <FeaturedProducts
-          title={featuredProducts.title}
-          products={featuredProducts.products}
-        />
-      )}
+      <FeaturedProducts title={featured?.title} products={featured?.products} />
       <HeroOverlappingImages />
       <Perks />
     </>
