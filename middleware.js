@@ -20,7 +20,7 @@ export async function middleware(NextRequest) {
         .sort((a, b) => {
           return new Date(b.lastVisited) - new Date(a.lastVisited);
         })
-        .slice(0, 2)
+        .slice(0, 3)
         .map((p) => p.product);
       response.setPageProp("keepShopping", {
         title: "Keep Shopping",
