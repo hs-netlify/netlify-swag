@@ -1,11 +1,11 @@
 import { createContext, useState } from 'react';
 
 const CookiesContext = createContext({
-    cookieConsent,
+    cookies: null,
     accpectCookies: () => { },
 });
 
-export function FavoritesContextProvider(props) {
+export function CookieContextProvider(props) {
     const [cookieConsent, setCookieConsent] = useState();
 
     function acceptCookiesHandler() {
@@ -14,7 +14,7 @@ export function FavoritesContextProvider(props) {
     }
 
     const context = {
-        cookieConsent,
+        cookies: cookieConsent,
         accpectCookies: acceptCookiesHandler
     };
 

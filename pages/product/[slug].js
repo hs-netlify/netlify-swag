@@ -1,12 +1,14 @@
-import ProductVariantPicker from "../../components/ProductVariantPicker";
+import { useEffect, useContext } from "react";
+import Cookies from "js-cookie";
 import Image from "next/image";
+
+import ProductVariantPicker from "../../components/ProductVariantPicker";
 import {
   getMostPopularProductsUid,
   getNavigation,
   getProduct,
 } from "../../lib/prismic";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
+import CookiesContext from "../../context/cookies-context";
 
 function setVisitedProductsCookie(product) {
   const slug = product.shopify_product.handle;
@@ -35,12 +37,14 @@ function setVisitedProductsCookie(product) {
   Cookies.set("visitedProducts", JSON.stringify(visitedProducts));
 }
 
-export default function Product({ product, cookieConsentGiven }) {
+export default function Product({ product }) {
+  const cookieCtx = useContext(CookiesContext);
+
   useEffect(() => {
-    if (cookieConsentGiven) {
+    if (cookieCtx.cookies) {
       setVisitedProductsCookie(product);
     }
-  }, [cookieConsentGiven]);
+  }, [cookieCtx.cookies]);
 
   return (
     <main className="max-w-7xl py-12 mx-auto flex-grow px-4 sm:px-6 lg:px-8 grid gap-12 grid-cols-[3fr,2fr]">

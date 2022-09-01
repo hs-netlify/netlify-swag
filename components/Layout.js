@@ -1,15 +1,14 @@
+import { useContext, useState } from "react";
+
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import CookieBanner from "./CookieBanner";
 import CartSidebar from "./CartSidebar";
-import { useState } from "react";
+import CookiesContext from "../context/cookies-context";
 
-export default function Layout({ children, navLinks, cookieConsentGiven }) {
-  const [cookieConsent, setCookieConsent] = useState(cookieConsentGiven);
-  function handleAcceptCookies() {
-    document.cookie = "cookieConsentGiven=true; path=/";
-    setCookieConsent(true);
-  }
+
+export default function Layout({ children, navLinks }) {
+  const cookieCtx = useContext(CookiesContext);
 
   const [open, setOpen] = useState(false);
   function openCart() {
@@ -22,8 +21,8 @@ export default function Layout({ children, navLinks, cookieConsentGiven }) {
         <main>{children}</main>
         <Footer />
       </div>
-      {cookieConsent ? null : (
-        <CookieBanner handleAccept={handleAcceptCookies} />
+      {cookieCtx.cookies ? null : (
+        <CookieBanner handleAccept={cookieCtx.accpectCookies} />
       )}
       <CartSidebar open={open} setOpen={setOpen} />
     </>

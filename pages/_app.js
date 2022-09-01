@@ -1,16 +1,18 @@
 import "tailwindcss/tailwind.css";
 import Layout from "../components/Layout";
 import { CartProvider } from "../context/cart-context";
+import { CookieContextProvider } from "../context/cookies-context";
 
 function MyApp({ Component, pageProps }) {
   return (
     <CartProvider>
-      <Layout
-        navLinks={pageProps.navLinks}
-        cookieConsentGiven={pageProps.cookieConsentGiven}
-      >
-        <Component {...pageProps} />
-      </Layout>
+      <CookieContextProvider>
+        <Layout
+          navLinks={pageProps.navLinks}
+        >
+          <Component {...pageProps} />
+        </Layout>
+      </CookieContextProvider>
     </CartProvider>
   );
 }
