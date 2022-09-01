@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const CookiesContext = createContext({
     cookies: null,
@@ -6,7 +7,7 @@ const CookiesContext = createContext({
 });
 
 export function CookieContextProvider(props) {
-    const [cookieConsent, setCookieConsent] = useState();
+    const [cookieConsent, setCookieConsent] = useState(Cookies.get('cookieConsentGiven'));
 
     function acceptCookiesHandler() {
         document.cookie = "cookieConsentGiven=true; path=/";
