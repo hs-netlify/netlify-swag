@@ -6,13 +6,11 @@ const CookiesContext = createContext({
   acceptCookies: () => {},
 });
 
-export function CookieContextProvider(props) {
-  const [cookieConsent, setCookieConsent] = useState(
-    Cookies.get("cookieConsentGiven")
-  );
+export function CookieContextProvider({ cookieConsentFromEdge, children }) {
+  const [cookieConsent, setCookieConsent] = useState(cookieConsentFromEdge);
 
   function acceptCookiesHandler() {
-    document.cookie = "cookieConsentGiven=true; path=/";
+    Cookies.set("cookieConsentGiven", true);
     setCookieConsent(true);
   }
 
@@ -23,7 +21,7 @@ export function CookieContextProvider(props) {
 
   return (
     <CookiesContext.Provider value={context}>
-      {props.children}
+      {children}
     </CookiesContext.Provider>
   );
 }

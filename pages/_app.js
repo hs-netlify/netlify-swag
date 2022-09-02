@@ -6,10 +6,10 @@ import { CookieContextProvider } from "../context/cookies-context";
 function MyApp({ Component, pageProps }) {
   return (
     <CartProvider>
-      <CookieContextProvider>
-        <Layout
-          navLinks={pageProps.navLinks}
-        >
+      <CookieContextProvider
+        cookieConsentFromEdge={pageProps.cookieConsentGiven}
+      >
+        <Layout navLinks={pageProps.navLinks}>
           <Component {...pageProps} />
         </Layout>
       </CookieContextProvider>
