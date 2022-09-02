@@ -4,9 +4,10 @@ import Perks from "../components/Perks.js";
 import FeaturedProducts from "../components/FeaturedProducts";
 import { useHydrated } from "../lib/utils";
 
-export default function Home({ featuredProducts, keepShopping }) {
+export default function Home({ featuredProducts, recommendedProducts }) {
   const hydrated = useHydrated();
-  const featured = hydrated && keepShopping ? keepShopping : featuredProducts;
+  const featured =
+    hydrated && recommendedProducts ? recommendedProducts : featuredProducts;
   return (
     <>
       <FeaturedProducts title={featured?.title} products={featured?.products} />

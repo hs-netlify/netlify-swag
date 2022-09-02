@@ -1,5 +1,6 @@
 import { MiddlewareRequest } from "@netlify/next";
-
+const recommandationsAPI =
+  "https://netlifyswag-recommendations.netlify.app/recommendations/";
 export async function middleware(NextRequest) {
   const request = new MiddlewareRequest(NextRequest);
 
@@ -13,19 +14,25 @@ export async function middleware(NextRequest) {
       },
     });
 
-    const visitedProductsJSON = request.cookies.get("visitedProducts");
-    if (NextRequest.nextUrl.pathname === "/" && visitedProductsJSON) {
-      const visitedProducts = JSON.parse(visitedProductsJSON);
-      const keepShoppingProducts = Object.values(visitedProducts)
-        .sort((a, b) => {
-          return new Date(b.lastVisited) - new Date(a.lastVisited);
-        })
-        .slice(0, 3)
-        .map((p) => p.product);
-      response.setPageProp("keepShopping", {
-        title: "Keep Shopping",
-        products: keepShoppingProducts,
-      });
+    const lastVisitedProduct = request.cookies.get("lastVisitedProduct");
+    if (NextRequest.nextUrl.pathname === "/" && lastVisitedProduct) {
+      try {
+        const recommendations = await fetch(
+          `${recommandationsAPI}${lastVisitedProduct}`
+        );
+        if (!recommendations.ok) {
+          throw new Error(recommendations.body);
+        } else {
+          const data = await recommendations.json();
+          const recommendedProducts = {
+            title: "Recommended for you",
+            products: data,
+          };
+          response.setPageProp("recommendedProducts", recommendedProducts);
+        }
+      } catch (error) {
+        console.log(`Error getting recommendations: ${error}`);
+      }
     }
 
     return response;

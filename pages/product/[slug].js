@@ -9,31 +9,9 @@ import {
 } from "../../lib/prismic";
 import CookiesContext from "../../context/cookies-context";
 
-function setVisitedProductsCookie(product) {
+function setLastVisitedProductCookie(product) {
   const slug = product.shopify_product.handle;
-  const productSummary = {
-    title: product.name,
-    id: slug,
-    href: `/product/${slug}`,
-    imageUrl: product.shopify_product.image.src,
-  };
-  const visitedProductsJson = Cookies.get("visitedProducts");
-  let visitedProducts = {};
-  if (visitedProductsJson) {
-    visitedProducts = JSON.parse(visitedProductsJson);
-  }
-  if (visitedProducts[slug]) {
-    visitedProducts[slug].product = productSummary;
-    visitedProducts[slug].vistCount++;
-    visitedProducts[slug].lastVisited = new Date();
-  } else {
-    visitedProducts[slug] = {
-      product: productSummary,
-      vistCount: 1,
-      lastVisited: new Date(),
-    };
-  }
-  Cookies.set("visitedProducts", JSON.stringify(visitedProducts));
+  Cookies.set("lastVisitedProduct", slug);
 }
 
 export default function Product({ product }) {
@@ -41,7 +19,7 @@ export default function Product({ product }) {
 
   useEffect(() => {
     if (cookieConsentGiven) {
-      setVisitedProductsCookie(product);
+      setLastVisitedProductCookie(product);
     }
   }, [cookieConsentGiven]);
 
