@@ -3,13 +3,19 @@ import HeroOverlappingImages from "../components/HeroOverlappingImages";
 import Perks from "../components/Perks.js";
 import FeaturedProducts from "../components/FeaturedProducts";
 import { useHydrated } from "../lib/utils";
+import TopBanner from "../components/TopBanner";
 
-export default function Home({ featuredProducts, recommendedProducts }) {
+export default function Home({
+  discountMessage,
+  featuredProducts,
+  recommendedProducts,
+}) {
   const hydrated = useHydrated();
   const featured =
     hydrated && recommendedProducts ? recommendedProducts : featuredProducts;
   return (
     <>
+      <TopBanner message={discountMessage} />
       <FeaturedProducts title={featured?.title} products={featured?.products} />
       <HeroOverlappingImages />
       <Perks />
@@ -37,6 +43,7 @@ export async function getStaticProps({ params }) {
   };
   return {
     props: {
+      discountMessage: "Save 10% with code: WELCOME10",
       navLinks,
       featuredProducts,
     },

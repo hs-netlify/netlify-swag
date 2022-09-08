@@ -1,12 +1,34 @@
 import { MiddlewareRequest } from "@netlify/next";
 const recommandationsAPI =
   "https://netlifyswag-recommendations.netlify.app/recommendations/";
+
+const discountCodes = {
+  US: {
+    code: "LABORDAY2022",
+    discount: 20,
+  },
+  UK: {
+    code: "CORBLIMEY!",
+    discount: 50,
+  },
+};
+
 export async function middleware(NextRequest) {
+  // enrich request with Advanced middleware goodness
   const request = new MiddlewareRequest(NextRequest);
+  const response = await request.next();
+
+  if (NextRequest.nextUrl.pathname === "/") {
+    const geoDiscount = discountCodes[request.geo.country];
+    if (geoDiscount) {
+      const message = `Save ${geoDiscount.discount}% with code: ${geoDiscount.code}`;
+      response.replaceText("#discountMessage", message);
+      response.setPageProp("discountMessage", message);
+    }
+  }
 
   const hasCookieConsent = request.cookies.get("cookieConsentGiven");
   if (hasCookieConsent) {
-    const response = await request.next();
     response.setPageProp("cookieConsentGiven", true);
     response.rewriteHTML("#cookie-banner", {
       element(e) {
@@ -34,7 +56,6 @@ export async function middleware(NextRequest) {
         console.log(`Error getting recommendations: ${error}`);
       }
     }
-
-    return response;
   }
+  return response;
 }
