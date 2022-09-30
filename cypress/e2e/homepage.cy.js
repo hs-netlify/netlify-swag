@@ -1,6 +1,7 @@
 describe("Homepage", () => {
-    it("Loads", () => {
+    it("Should remove cookie banner", () => {
         cy.visit("/");
-        cy.get("h1").should("be.visible");
+        cy.get('.order-3 > [data-test="submit-button"]').click();
+        cy.get('.order-3 > [data-test="submit-button"]').should('not.exist');
     })
 })

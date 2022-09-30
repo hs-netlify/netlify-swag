@@ -10,6 +10,7 @@ export default function CookieBanner({ handleAccept }) {
             </p>
             <div className="order-3 mt-2 w-full flex-shrink-0 sm:order-2 sm:mt-0 sm:w-auto">
               <button
+                data-test="submit-button"
                 onClick={handleAccept}
                 className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-2 text-sm font-medium text-green-600 shadow-sm hover:bg-green-50"
               >
