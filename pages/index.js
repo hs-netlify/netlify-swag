@@ -43,7 +43,7 @@ export async function getStaticProps({ params }) {
   };
   return {
     props: {
-      discountMessage: "Save 10% with code: WELCOMEFALL",
+      discountMessage: "Save 10% with code: WELCOME10",
       navLinks,
       featuredProducts,
     },
