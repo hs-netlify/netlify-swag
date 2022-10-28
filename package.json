@@ -30,7 +30,6 @@
   "devDependencies": {
     "autoprefixer": "^10.2.6",
     "cypress": "^10.9.0",
-    "netlify-plugin-cypress": "^2.2.0",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
   }
