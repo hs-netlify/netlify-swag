@@ -5,4 +5,4 @@
 #
 #[context.production]
 #  # Overide the default command so the basic auth headers are not added in production
-  command = "yarn build"
+  command = "npm build"
