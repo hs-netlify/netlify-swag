@@ -1,0 +1,8 @@
+[build]
+#  publish = ".next"
+#  # Default build command adds basic auth headers to all routes
+#  command = "echo '/*\n Basic-Auth: $NETLIFY_DEV_USER:$NETLIFY_DEV_PASSWORD' > _headers && yarn build"
+#
+#[context.production]
+#  # Overide the default command so the basic auth headers are not added in production
+  command = "yarn build"
