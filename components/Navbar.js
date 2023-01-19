@@ -11,7 +11,7 @@ export default function Navbar({ navLinks, openCart }) {
           <div className="flex items-center">
             <Link href="/">
               <a>
-                <span className="sr-only">Netlify</span>
+                <span className="sr-only">Netlify!</span>
                 <img
                   className="h-6 w-auto"
                   src="/netlify_logo.svg"
