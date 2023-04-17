@@ -56,7 +56,6 @@ export async function getStaticProps({ params }) {
       navLinks,
       product: product.data,
     },
-    revalidate: 60,
   };
 }
 
