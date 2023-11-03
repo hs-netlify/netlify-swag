@@ -5,6 +5,8 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import { useHydrated } from "../lib/utils";
 import TopBanner from "../components/TopBanner";
 
+//test
+
 export default function Home({
   discountMessage,
   featuredProducts,
